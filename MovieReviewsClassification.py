@@ -156,6 +156,10 @@ model.fit(train_data, train_labels, validation_data=(test_data, test_labels), ep
 scores = model.evaluate(test_data, test_labels, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
+#prediction_single = model.predict(test_data[0])
+
+#print(predictions_single)
+
 #Tune hyperparameters
 
 #deploy your model

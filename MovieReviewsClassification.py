@@ -1,12 +1,17 @@
 from collections import Counter
 import tensorflow as tf 
-from tensorflow import keras 
 import numpy as np
 from pprint import pprint
 import matplotlib.pyplot as plt
-
+from keras.preprocessing.sequence import pad_sequences
+# from keras.preprocessing import sequence
+import keras
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import Flatten
+from keras.layers.embeddings import Embedding
 def exploreData(training, test):
-  
+
     training_data=training[0]
     training_labels = training[1]
     test_data = test[0]
@@ -109,8 +114,26 @@ exploreData((train_data, train_labels), (test_data, test_labels))
 #Choose a model
 
 #Prepare your data
+# https://keras.io/preprocessing/sequence/
+train_data = pad_sequences(train_data, maxlen=500)
+test_data = pad_sequences(test_data, maxlen=500)
+print(len(train_data[0]))
+print(len(test_data[0]))
+
+print(train_data[0])
 
 #Build, train, and evaluate your model
+vocab_size = 10000
+model = Sequential()
+model.add(Embedding(vocab_size, 16))
+#model.add(Flatten())
+model.add(Dense(units=64, activation='relu'))
+model.add(Dense(units=1, activation='sigmoid')) 
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=["accuracy"])
+print(model.summary())
+
+#fit the model
+model.fit(train_data, train_labels, validation_data=(test_data, test_labels), epochs=2, batch_size=128, verbose=2)
 
 #Tune hyperparameters
 

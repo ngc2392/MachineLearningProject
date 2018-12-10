@@ -18,6 +18,7 @@ def exploreData(training, test):
     print("Training entries: {}, training labels: {}".format(len    (training_data), len(training_labels)))
 
     # Number of classes
+    print(np.unique(train_labels))
     print(np.unique(training_labels).size)
 
     #Number of samples per class

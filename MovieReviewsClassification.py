@@ -124,16 +124,37 @@ print(train_data[0])
 
 #Build, train, and evaluate your model
 vocab_size = 10000
+max_words = 500
+"""
 model = Sequential()
 model.add(Embedding(vocab_size, 16))
-#model.add(Flatten())
-model.add(Dense(units=64, activation='relu'))
+model.add(keras.layers.GlobalAveragePooling1D())
+model.add(Dense(units=16, activation='relu'))
 model.add(Dense(units=1, activation='sigmoid')) 
+"""
+"""
+model = Sequential()
+model.add(Embedding(vocab_size, 32, input_length=max_words))
+model.add(Flatten())
+model.add(Dense(250, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+"""
+
+model = Sequential()
+model.add(Dense(units=64, activation='relu'))
+model.add(Dense(units=1, activation='sigmoid'))
+
+#print(model.summary())
+
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=["accuracy"])
-print(model.summary())
+
 
 #fit the model
 model.fit(train_data, train_labels, validation_data=(test_data, test_labels), epochs=2, batch_size=128, verbose=2)
+
+scores = model.evaluate(test_data, test_labels, verbose=0)
+print("Accuracy: %.2f%%" % (scores[1]*100))
 
 #Tune hyperparameters
 

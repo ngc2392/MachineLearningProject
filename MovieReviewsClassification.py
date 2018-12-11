@@ -9,6 +9,7 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Flatten
+from keras.layers import Dropout
 from keras.layers.embeddings import Embedding
 def exploreData(training, test):
 
@@ -141,9 +142,19 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 """
 
+"""
 model = Sequential()
 model.add(Dense(units=64, activation='relu'))
 model.add(Dense(units=1, activation='sigmoid'))
+"""
+
+model = Sequential()
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(1, activation='sigmoid'))
+
 
 #print(model.summary())
 

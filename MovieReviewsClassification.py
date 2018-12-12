@@ -106,7 +106,7 @@ print("train_data has a shape of " + str(train_data.shape))
 #print(train_data[0])
 #print("ALL LABELS")
 #print(train_labels)
-#print(convert_integers_to_text(train_data[0]))
+print(convert_integers_to_text(train_data[0]))
 print(len(train_data[0]))
 print(len(train_data[1]))
 
@@ -133,6 +133,7 @@ model.add(keras.layers.GlobalAveragePooling1D())
 model.add(Dense(units=16, activation='relu'))
 model.add(Dense(units=1, activation='sigmoid')) 
 """
+
 """
 model = Sequential()
 model.add(Embedding(vocab_size, 32, input_length=max_words))
@@ -148,7 +149,34 @@ model.add(Dense(units=64, activation='relu'))
 model.add(Dense(units=1, activation='sigmoid'))
 """
 
+""" DELETE
 model = Sequential()
+model.add(Embedding(vocab_size, 32, input_length=max_words))
+model.add(Flatten())
+model.add(Dense(250, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+"""
+
+""" MY MODEL
+model = Sequential()
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(64, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(1, activation='sigmoid'))
+"""
+
+"""
+model = Sequential()
+model.add(Embedding(vocab_size, 32, input_length=max_words))
+model.add(Flatten())
+model.add(Dense(250, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+"""
+
+model = Sequential()
+model.add(Embedding(vocab_size, 32, input_length=max_words))
+model.add(Flatten())
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(64, activation='relu'))
@@ -166,7 +194,7 @@ model.fit(train_data, train_labels, validation_data=(test_data, test_labels), ep
 
 scores = model.evaluate(test_data, test_labels, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
-
+print(model.summary())
 #prediction_single = model.predict(test_data[0])
 
 #print(predictions_single)

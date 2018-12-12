@@ -126,36 +126,6 @@ print(train_data[0])
 #Build, train, and evaluate your model
 vocab_size = 10000
 max_words = 500
-"""
-model = Sequential()
-model.add(Embedding(vocab_size, 16))
-model.add(keras.layers.GlobalAveragePooling1D())
-model.add(Dense(units=16, activation='relu'))
-model.add(Dense(units=1, activation='sigmoid')) 
-"""
-
-"""
-model = Sequential()
-model.add(Embedding(vocab_size, 32, input_length=max_words))
-model.add(Flatten())
-model.add(Dense(250, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-"""
-
-"""
-model = Sequential()
-model.add(Dense(units=64, activation='relu'))
-model.add(Dense(units=1, activation='sigmoid'))
-"""
-
-""" DELETE
-model = Sequential()
-model.add(Embedding(vocab_size, 32, input_length=max_words))
-model.add(Flatten())
-model.add(Dense(250, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-"""
 
 """ MY MODEL
 model = Sequential()
@@ -166,14 +136,7 @@ model.add(Dropout(0.5))
 model.add(Dense(1, activation='sigmoid'))
 """
 
-"""
-model = Sequential()
-model.add(Embedding(vocab_size, 32, input_length=max_words))
-model.add(Flatten())
-model.add(Dense(250, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-"""
-
+# Adding Embedding Layer
 model = Sequential()
 model.add(Embedding(vocab_size, 32, input_length=max_words))
 model.add(Flatten())
